@@ -2,6 +2,7 @@
   "name": "pourrfot",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://SHU-PoURRfOT-1.github.io/pourrfot-web",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
