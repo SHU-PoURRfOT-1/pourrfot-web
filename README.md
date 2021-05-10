@@ -1,5 +1,10 @@
 # pourrfot
 
+## Environment
+
+Visual Studion Code(version 1.55.2)
+see other dependencies AND devDependencies in package.json
+
 ## Project setup
 
 ```
@@ -16,10 +21,4 @@ npm run serve
 
 ```
 npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
 ```
