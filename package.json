@@ -2,6 +2,7 @@
   "name": "pourrfot",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://SHU-PoURRfOT-1.github.io/pourrfot-web",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -9,7 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "core-js": "^3.6.5",
+    "core-js": "^3.11.2",
     "element-ui": "^2.4.5",
     "js-cookie": "^2.2.1",
     "normalize.css": "^8.0.1",
@@ -26,7 +27,7 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-component": "^1.1.1",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vue": "^7.9.0",
     "sass": "^1.32.12",
     "sass-loader": "^10.1.1",
     "script-ext-html-webpack-plugin": "^2.1.5",
