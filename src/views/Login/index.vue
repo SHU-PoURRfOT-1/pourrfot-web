@@ -116,7 +116,6 @@ export default {
       password: '123456789',
       isShowPassword: false,
       isChecked: false,
-      computeHeight: null,
       loading: false,
     }
   },

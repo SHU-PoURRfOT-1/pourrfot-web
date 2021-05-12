@@ -17,6 +17,7 @@
 
 <script>
 import { Navbar, Sidebar, Main } from './components'
+import { mapState, mapActions } from 'vuex'
 import ResizeMixin from './mixin/ResizeHandler'
 export default {
   name: 'Layout',
@@ -27,6 +28,9 @@ export default {
   },
   mixins: [ResizeMixin],
   computed: {
+    ...mapState({
+      sidebar: state => state.app.sidebar,
+    }),
     sidebar() {
       return this.$store.state.app.sidebar
     },
@@ -46,8 +50,10 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['closeSideBar']),
     handleClickOutside() {
-      this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+      this.closeSideBar({ withoutAnimation: false })
+      // this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     },
   },
 }

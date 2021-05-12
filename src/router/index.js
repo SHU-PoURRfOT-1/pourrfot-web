@@ -5,17 +5,17 @@ import constantRoutes from './routes'
 
 Vue.use(VueRouter)
 
+// solve 'Avoided redundant navigation to current location'
+// const originalPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch(err => err)
+// }
+
 const createRouter = () =>
   new VueRouter({
     mode: 'history',
     routes: constantRoutes,
-    scrollBehavior(to, from, savedPosition) {
-      if (savedPosition) {
-        return savedPosition
-      } else {
-        return { x: 0, y: 0 }
-      }
-    },
+    scrollBehavior: () => ({ y: 0 }),
   })
 
 const router = createRouter()

@@ -27,39 +27,123 @@ export const constantRoutes = [
       },
     ],
   },
-  // {
-  //   path: '/example',
-  //   component: Layout,
-  //   redirect: '/example/table',
-  //   name: 'Example',
-  //   meta: { title: 'Example', icon: 'el-icon-s-help' },
-  //   children: [
-  //     {
-  //       path: 'table',
-  //       name: 'Table',
-  //       component: () => import('@/views/table/index'),
-  //       meta: { title: 'Table', icon: 'table' },
-  //     },
-  //     {
-  //       path: 'tree',
-  //       name: 'Tree',
-  //       component: () => import('@/views/tree/index'),
-  //       meta: { title: 'Tree', icon: 'tree' },
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/form',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Form',
-  //       component: () => import('@/views/form/index'),
-  //       meta: { title: 'Form', icon: 'form' },
-  //     },
-  //   ],
-  // },
+  {
+    path: '/management',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'Management',
+    meta: { title: 'Management', icon: 'management' },
+    children: [
+      {
+        path: 'course',
+        name: 'Course',
+        redirect: 'noRedirect',
+        component: () => import('@/views/Course/index'),
+        meta: { title: 'Course', icon: 'course' },
+        children: [
+          {
+            path: 'info',
+            name: 'CourseInfo',
+            component: () => import('@/views/Course/Info/index'),
+            meta: { title: 'Info', icon: 'info' },
+          },
+          {
+            path: 'group',
+            name: 'Group',
+            component: () => import('@/views/Group/index'),
+            meta: { title: 'Group', icon: 'group' },
+          },
+          {
+            path: 'member',
+            name: 'Member',
+            component: () => import('@/views/Course/Member/index'),
+            meta: { title: 'Member', icon: 'member' },
+          },
+          {
+            path: 'grade',
+            name: 'Grade',
+            component: () => import('@/views/Grade/index'),
+            meta: { title: 'Grade', icon: 'grade' },
+          },
+          {
+            path: 'activity',
+            name: 'Activity',
+            component: () => import('@/views/Activity/index'),
+            meta: { title: 'Activity', icon: 'activity' },
+          },
+          {
+            path: 'file',
+            name: 'StudentFile',
+            component: () => import('@/views/File/index'),
+            meta: { title: 'File', icon: 'file' },
+          },
+        ],
+      },
+      {
+        path: 'project',
+        name: 'Project',
+        redirect: 'noRedirect',
+        component: () => import('@/views/Project/index'),
+        meta: { title: 'Project', icon: 'project' },
+        children: [
+          {
+            path: 'info',
+            name: 'ProjectInfo',
+            component: () => import('@/views/Project/Info/index'),
+            meta: { title: 'Info', icon: 'info' },
+          },
+          {
+            path: 'member',
+            name: 'ProjectMember',
+            component: () => import('@/views/Project/Member/index'),
+            meta: { title: 'Member', icon: 'member' },
+          },
+          {
+            path: 'file',
+            name: 'ProjectFile',
+            component: () => import('@/views/File/index'),
+            meta: { title: 'File', icon: 'file' },
+          },
+        ],
+      },
+      {
+        path: 'transaction',
+        name: 'Transaction',
+        component: () => import('@/views/Transaction/index'),
+        meta: { title: 'Transaction', icon: 'transaction' },
+      },
+      {
+        path: 'file',
+        name: 'File',
+        component: () => import('@/views/File/index'),
+        meta: { title: 'File', icon: 'file' },
+      },
+    ],
+  },
+  {
+    path: '/message',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Message',
+        component: () => import('@/views/Message/index'),
+        meta: { title: 'Message', icon: 'message' },
+      },
+    ],
+  },
+  {
+    path: '/bbs',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'BBS',
+        component: () => import('@/views/BBS/index'),
+        meta: { title: 'BBS', icon: 'bbs' },
+      },
+    ],
+  },
   {
     path: 'external-link',
     component: Layout,

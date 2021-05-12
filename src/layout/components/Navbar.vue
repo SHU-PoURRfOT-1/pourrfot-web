@@ -3,7 +3,7 @@
     <hamburger
       :is-active="sidebar.opened"
       class="hamburger-container"
-      @toggleClick="toggleSideBar"
+      @toggleClick="toggle"
     />
 
     <breadcrumb class="breadcrumb-container" />
@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -53,11 +53,15 @@ export default {
     Hamburger,
   },
   computed: {
-    ...mapGetters(['sidebar', 'avatar']),
+    ...mapState({
+      sidebar: state => state.app.sidebar,
+      avatar: state => state.user.avatar,
+    }),
   },
   methods: {
-    toggleSideBar() {
-      this.$store.dispatch('app/toggleSideBar')
+    ...mapActions(['toggleSideBar']),
+    toggle() {
+      this.toggleSideBar()
     },
     async logout() {
       // await this.$store.dispatch('user/logout')

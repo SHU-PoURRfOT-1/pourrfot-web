@@ -11,6 +11,8 @@ import {
   Menu,
   MenuItem,
   Scrollbar,
+  Submenu,
+  Tooltip,
 } from 'element-ui'
 
 Vue.use(Breadcrumb)
@@ -25,6 +27,8 @@ Vue.use(Menu)
 Vue.use(MenuItem)
 // a hidden component, won't be shown in document, please see the issue
 Vue.use(Scrollbar)
+Vue.use(Submenu)
+Vue.use(Tooltip)
 
 Vue.prototype.$loading = Loading.service
 // Vue.prototype.$msgbox = MessageBox
