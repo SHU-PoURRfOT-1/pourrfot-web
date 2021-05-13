@@ -188,10 +188,18 @@ $black: #000;
   margin-left: -15px;
 }
 .header-wrapper {
+  @extend %padding-15;
   flex: 0 0 50%;
   max-width: 50%;
   margin-bottom: 3rem;
-  @extend %padding-15;
+  @media (max-width: 576px) {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 375px) {
+    margin-bottom: 0;
+  }
 }
 //HEADING SECTION
 .heading-section {
@@ -202,9 +210,13 @@ $black: #000;
   @extend %padding-15;
   flex: 0 0 33.33333%;
   max-width: 33.33333%;
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     flex: 0 0 50%;
     max-width: 50%;
+  }
+  @media (max-width: 768px) {
+    flex: 0 0 66.7%;
+    max-width: 66.7%;
   }
   @media (max-width: 576px) {
     flex: 0 0 100%;
@@ -223,6 +235,9 @@ $black: #000;
     margin-bottom: 1.5rem;
     font-size: 1.75rem;
     font-weight: 400;
+    @media (max-width: 375px) {
+      margin-bottom: 1rem;
+    }
   }
   p {
     margin-bottom: 1rem;
@@ -323,7 +338,7 @@ $black: #000;
 .checkbox-wrap {
   display: block;
   position: relative;
-  padding-left: 20px;
+  padding-left: 24px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 16px;
@@ -337,7 +352,7 @@ $black: #000;
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
-  top: -20%;
+  top: -18%;
   left: 0;
   font-size: 20px;
   transition: all ease 0.3s;

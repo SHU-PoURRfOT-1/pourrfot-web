@@ -7,8 +7,10 @@ function resolve(dir) {
 const name = 'pourrfot' // page title
 module.exports = {
   // publicPath: process.env.NODE_ENV === 'production' ? '/pourrfot-web/' : '/',
-  publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
+  // publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
+  publicPath: '/',
   outputDir: 'dist',
+  assetsDir: 'static',
   productionSourceMap: false,
   configureWebpack: {
     name: name,
