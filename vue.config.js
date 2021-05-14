@@ -20,6 +20,20 @@ module.exports = {
       },
     },
   },
+  devServer: {
+    // disableHostCheck: true,
+    proxy: {
+      '/shu': {
+        target: 'http://47.98.133.186/cas/api',
+        changeOrigin: true,
+        ws: false,
+        secure: false,
+        pathRewrite: {
+          '^/shu': '',
+        },
+      },
+    },
+  },
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
     config.plugin('preload').tap(() => [

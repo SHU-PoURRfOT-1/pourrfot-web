@@ -7,36 +7,22 @@ const getDefaultState = () => {
     token: getToken(),
     name: '',
     avatar: '',
+    userInfo: {},
   }
 }
 
 const state = getDefaultState()
 
-const mutations = {
-  RESET_STATE: state => {
-    Object.assign(state, getDefaultState())
-  },
-  SET_TOKEN: (state, token) => {
-    state.token = token
-  },
-  SET_NAME: (state, name) => {
-    state.name = name
-  },
-  SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
-  },
-}
-
 const actions = {
   // user login
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password })
+      login(userInfo)
         .then(response => {
           const { data } = response
           commit('SET_TOKEN', data.token)
           setToken(data.token)
+          commit('SET_USER_INFO', data.user)
           resolve()
         })
         .catch(error => {
@@ -91,6 +77,24 @@ const actions = {
       commit('RESET_STATE')
       resolve()
     })
+  },
+}
+
+const mutations = {
+  RESET_STATE: state => {
+    Object.assign(state, getDefaultState())
+  },
+  SET_TOKEN: (state, token) => {
+    state.token = token
+  },
+  SET_USER_INFO: (state, info) => {
+    state.userInfo = { ...info }
+  },
+  SET_NAME: (state, name) => {
+    state.name = name
+  },
+  SET_AVATAR: (state, avatar) => {
+    state.avatar = avatar
   },
 }
 

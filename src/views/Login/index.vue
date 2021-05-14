@@ -17,7 +17,7 @@
                   <form action="#">
                     <input
                       type="text"
-                      v-model="username"
+                      v-model="loginForm.username"
                       class="form-control"
                       placeholder="Username"
                       autocomplete
@@ -30,7 +30,7 @@
                     <input
                       v-if="isShowPassword"
                       type="text"
-                      v-model="password"
+                      v-model="loginForm.password"
                       class="form-control"
                       placeholder="Password"
                       autocomplete
@@ -39,7 +39,7 @@
                     <input
                       v-else
                       type="password"
-                      v-model="password"
+                      v-model="loginForm.password"
                       class="form-control"
                       placeholder="Password"
                       autocomplete
@@ -107,30 +107,68 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'Login',
   data() {
     return {
-      username: '20721647',
-      password: '123456789',
+      loginForm: {
+        username: 'admin',
+        password: 'admin',
+      },
       isShowPassword: false,
       isChecked: false,
       loading: false,
     }
   },
-  // computed: {
-  //   ...mapActions(['login']),
-  // },
+  mounted() {
+    let info = localStorage.getItem('LoginInfo')
+    if (info) {
+      this.loginAction(JSON.parse(info))
+    }
+  },
   methods: {
+    ...mapActions(['login']),
+    validate() {
+      if (!this.loginForm.username || !this.loginForm.password) {
+        this.$message({
+          message: 'Invaliad Input',
+          type: 'warning',
+        })
+        return false
+      } else {
+        return true
+      }
+    },
+    saveLoginInfo() {
+      if (this.isChecked) {
+        localStorage.setItem('LoginInfo', JSON.stringify(this.loginForm))
+      }
+    },
     submitLogin() {
+      let valid = this.validate()
+      if (valid) {
+        this.loginAction(this.loginForm)
+      } else {
+        console.log()
+      }
+    },
+    loginAction(loginInfo) {
       this.loading = true
-      setTimeout(() => {
-        // this.login().then(() => {
-        this.loading = false
-        this.$router.push({ path: '/' })
-        // })
-      }, 2000)
+      this.login({
+        clientId: 'pourrfot-web',
+        grantType: 'PASSWORD',
+        ...loginInfo,
+      })
+        .then(() => {
+          this.$router.push({ path: '/' })
+          this.loading = false
+          this.saveLoginInfo()
+        })
+        .catch(err => {
+          console.log(err)
+          this.loading = false
+        })
     },
   },
 }

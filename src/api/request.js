@@ -8,7 +8,7 @@ const instance = axios.create({
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000, // request timeout
 })
-
+instance.defaults.headers.post['Content-Type'] = 'application/json'
 // request interceptor
 instance.interceptors.request.use(
   config => {
@@ -55,7 +55,7 @@ instance.interceptors.response.use(
     // }
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    if (res.code !== 200) {
       Message({
         message: res.message || 'Error',
         type: 'error',
@@ -74,7 +74,7 @@ instance.interceptors.response.use(
             type: 'warning',
           }
         ).then(() => {
-          store.dispatch('user/resetToken').then(() => {
+          store.dispatch('resetToken').then(() => {
             location.reload()
           })
         })
