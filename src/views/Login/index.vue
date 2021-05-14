@@ -122,10 +122,17 @@ export default {
     }
   },
   mounted() {
-    let info = localStorage.getItem('LoginInfo')
+    let info = localStorage.getItem('loginInfo')
     if (info) {
       this.loginAction(JSON.parse(info))
     }
+  },
+  watch: {
+    isChecked(newValue) {
+      if (!newValue) {
+        localStorage.removeItem('loginInfo')
+      }
+    },
   },
   methods: {
     ...mapActions(['login']),
@@ -142,7 +149,7 @@ export default {
     },
     saveLoginInfo() {
       if (this.isChecked) {
-        localStorage.setItem('LoginInfo', JSON.stringify(this.loginForm))
+        localStorage.setItem('loginInfo', JSON.stringify(this.loginForm))
       }
     },
     submitLogin() {
