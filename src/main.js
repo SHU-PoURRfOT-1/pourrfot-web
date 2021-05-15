@@ -4,6 +4,12 @@ import App from './App.vue'
 import './plugins/element.js'
 import router from './router'
 
+import 'normalize.css/normalize.css'
+import '@/styles/global.scss'
+import '@/styles/index.scss' // global css
+
+import './icons' // icon
+
 Vue.config.productionTip = false
 
 new Vue({
