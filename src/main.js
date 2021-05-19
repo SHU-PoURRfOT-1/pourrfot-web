@@ -10,6 +10,11 @@ import '@/styles/index.scss' // global css
 
 import './icons' // icon
 
+import 'default-passive-events'
+
+// import '@/directive/permission'
+// import './permission' // permission control
+
 Vue.config.productionTip = false
 
 new Vue({

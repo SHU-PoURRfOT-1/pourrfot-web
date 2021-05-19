@@ -3,27 +3,41 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Button,
+  Dialog,
+  Divider,
   Dropdown,
   DropdownItem,
   DropdownMenu,
+  Form,
+  FormItem,
   Icon,
+  Input,
   Loading,
   Menu,
   MenuItem,
   Message,
   MessageBox,
+  PageHeader,
+  Pagination,
   Scrollbar,
   Submenu,
+  Table,
+  TableColumn,
   Tooltip,
 } from 'element-ui'
 
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
 Vue.use(Button)
+Vue.use(Dialog)
+Vue.use(Divider)
 Vue.use(Dropdown)
 Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
+Vue.use(Form)
+Vue.use(FormItem)
 Vue.use(Icon)
+Vue.use(Input)
 Vue.use(Loading.directive)
 Vue.use(Menu)
 Vue.use(MenuItem)
@@ -31,8 +45,12 @@ Vue.use(MenuItem)
 Vue.component(Message.name, Message)
 Vue.component(MessageBox.name, MessageBox)
 // a hidden component, won't be shown in document, please see the issue
+Vue.use(PageHeader)
+Vue.use(Pagination)
 Vue.use(Scrollbar)
 Vue.use(Submenu)
+Vue.use(Table)
+Vue.use(TableColumn)
 Vue.use(Tooltip)
 
 Vue.prototype.$loading = Loading.service
