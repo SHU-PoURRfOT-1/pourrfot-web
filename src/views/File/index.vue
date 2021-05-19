@@ -1,5 +1,5 @@
 <template>
-  <div>这是文件管理</div>
+  <div>这是文件列表</div>
 </template>
 
 <script>

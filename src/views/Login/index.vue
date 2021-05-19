@@ -59,8 +59,6 @@
                     type="submit"
                     class="form-control btn btn-primary"
                     @click="submitLogin"
-                    v-loading.fullscreen.lock="loading"
-                    element-loading-background="rgba(0, 0, 0, 0.6)"
                   >
                     Sign in
                   </button>
@@ -113,12 +111,13 @@ export default {
   data() {
     return {
       loginForm: {
-        username: 'admin',
-        password: 'admin',
+        username: 'caomin',
+        password: 'caomin',
+        clientId: 'pourrfot-web',
+        grantType: 'PASSWORD',
       },
       isShowPassword: false,
       isChecked: false,
-      loading: false,
     }
   },
   mounted() {
@@ -161,21 +160,10 @@ export default {
       }
     },
     loginAction(loginInfo) {
-      this.loading = true
-      this.login({
-        clientId: 'pourrfot-web',
-        grantType: 'PASSWORD',
-        ...loginInfo,
+      this.login({ ...loginInfo }).then(() => {
+        this.saveLoginInfo()
+        this.$router.push({ path: '/' })
       })
-        .then(() => {
-          this.$router.push({ path: '/' })
-          this.loading = false
-          this.saveLoginInfo()
-        })
-        .catch(err => {
-          console.log(err)
-          this.loading = false
-        })
     },
   },
 }

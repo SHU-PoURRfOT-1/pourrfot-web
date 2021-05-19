@@ -1,10 +1,10 @@
 <template>
-  <div>这是课程基础信息</div>
+  <div>这是上传页面</div>
 </template>
 
 <script>
 export default {
-  name: 'CourseInfo',
+  name: 'Upload',
 }
 </script>
 

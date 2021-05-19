@@ -1,16 +1,31 @@
 const BASE_URL =
-  process.env.NODE_ENV === 'development'
-    ? '/shu'
-    : 'http://47.98.133.186/cas/api'
+  process.env.NODE_ENV === 'development' ? '/shu' : 'http://47.98.133.186'
 
 const user = {
-  LOGIN: `${BASE_URL}/oauth/password-token`,
-  LOGOUT: `${BASE_URL}/vue-admin-template/user/logout`,
+  LOGIN: `${BASE_URL}/cas/api/oauth/password-token`,
   GET_USER_INFO: `${BASE_URL}/vue-admin-template/user/info`,
+}
+
+const course = {
+  GET_COURSE_DATA: `${BASE_URL}/api/courses/page`,
+  DELETE_COURSE_DATA: `${BASE_URL}/api/courses/delete`,
+  CREATE_COURSE_DATA: `${BASE_URL}/api/courses/create`,
+  UPDATE_COURSE_DATA: `${BASE_URL}/api/courses/update`,
+}
+
+const group = {
+  MAIN_GROUP_URL: `${BASE_URL}/api/courses`,
+}
+
+const project = {
+  GET_PROJECT_DATA: `${BASE_URL}/api/projects/page`,
 }
 
 const config = {
   ...user,
+  ...course,
+  ...group,
+  ...project,
 }
 
 export default config

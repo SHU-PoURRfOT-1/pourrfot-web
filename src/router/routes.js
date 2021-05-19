@@ -28,95 +28,52 @@ export const constantRoutes = [
     ],
   },
   {
-    path: '/management',
+    path: '/course',
     component: Layout,
-    redirect: 'noRedirect',
-    name: 'Management',
-    meta: { title: 'Management', icon: 'management' },
     children: [
       {
-        path: 'course',
+        path: 'index',
         name: 'Course',
-        redirect: 'noRedirect',
         component: () => import('@/views/Course/index'),
         meta: { title: 'Course', icon: 'course' },
-        children: [
-          {
-            path: 'info',
-            name: 'CourseInfo',
-            component: () => import('@/views/Course/Info/index'),
-            meta: { title: 'Info', icon: 'info' },
-          },
-          {
-            path: 'group',
-            name: 'Group',
-            component: () => import('@/views/Group/index'),
-            meta: { title: 'Group', icon: 'group' },
-          },
-          {
-            path: 'member',
-            name: 'Member',
-            component: () => import('@/views/Course/Member/index'),
-            meta: { title: 'Member', icon: 'member' },
-          },
-          {
-            path: 'grade',
-            name: 'Grade',
-            component: () => import('@/views/Grade/index'),
-            meta: { title: 'Grade', icon: 'grade' },
-          },
-          {
-            path: 'activity',
-            name: 'Activity',
-            component: () => import('@/views/Activity/index'),
-            meta: { title: 'Activity', icon: 'activity' },
-          },
-          {
-            path: 'file',
-            name: 'StudentFile',
-            component: () => import('@/views/File/index'),
-            meta: { title: 'File', icon: 'file' },
-          },
-        ],
       },
+    ],
+  },
+  {
+    path: '/project',
+    component: Layout,
+    children: [
       {
-        path: 'project',
+        path: 'index',
         name: 'Project',
-        redirect: 'noRedirect',
         component: () => import('@/views/Project/index'),
         meta: { title: 'Project', icon: 'project' },
-        children: [
-          {
-            path: 'info',
-            name: 'ProjectInfo',
-            component: () => import('@/views/Project/Info/index'),
-            meta: { title: 'Info', icon: 'info' },
-          },
-          {
-            path: 'member',
-            name: 'ProjectMember',
-            component: () => import('@/views/Project/Member/index'),
-            meta: { title: 'Member', icon: 'member' },
-          },
-          {
-            path: 'file',
-            name: 'ProjectFile',
-            component: () => import('@/views/File/index'),
-            meta: { title: 'File', icon: 'file' },
-          },
-        ],
       },
+    ],
+  },
+  // {
+  //   path: '/transaction',
+  //   name: 'Transaction',
+  //   component: Layout,
+  //   meta: { title: 'Transaction', icon: 'transaction' },
+  // },
+  {
+    path: '/file',
+    redirect: 'noRedirect',
+    component: Layout,
+    meta: { title: 'File', icon: 'file' },
+    children: [
       {
-        path: 'transaction',
-        name: 'Transaction',
-        component: () => import('@/views/Transaction/index'),
-        meta: { title: 'Transaction', icon: 'transaction' },
-      },
-      {
-        path: 'file',
-        name: 'File',
+        path: 'index',
+        name: 'List',
         component: () => import('@/views/File/index'),
-        meta: { title: 'File', icon: 'file' },
+        meta: { title: 'List', icon: 'list' },
+      },
+      {
+        path: 'upload',
+        name: 'Upload',
+        component: () => import('@/views/Upload/index'),
+        meta: { title: 'Upload', icon: 'upload' },
       },
     ],
   },
@@ -133,23 +90,11 @@ export const constantRoutes = [
     ],
   },
   {
-    path: '/bbs',
+    path: '/external-link',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'BBS',
-        component: () => import('@/views/BBS/index'),
-        meta: { title: 'BBS', icon: 'bbs' },
-      },
-    ],
-  },
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://www.baidu.com',
+        path: 'http://1.15.233.201/',
         meta: { title: 'External Link', icon: 'link' },
       },
     ],
@@ -158,4 +103,17 @@ export const constantRoutes = [
   { path: '*', redirect: '/404', hidden: true },
 ]
 
-export default constantRoutes
+export const asyncRoutes = [
+  // {
+  //   path: '/bbs',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'BBS',
+  //       component: () => import('@/views/BBS/index'),
+  //       meta: { title: 'BBS', icon: 'bbs', roles: ['admin', 'student'] },
+  //     },
+  //   ],
+  // },
+]
