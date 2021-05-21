@@ -24,3 +24,12 @@ jobs:
         run: |
           npm install
           npm run build
+      - name: ssh deploy
+        uses: easingthemes/ssh-deploy@v2.1.6
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_LIGHTHOUSE_KEY }}
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.ALIYUN_LIGHTHOUSE_HOST }}
+          REMOTE_USER: ${{ secrets.ALIYUN_LIGHTHOUSE_USERNAME }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
+          EXCLUDE: "/dist/, /node_modules/"
