@@ -1,4 +1,5 @@
-const BASE_URL = process.env.NODE_ENV === 'development' ? '/shu' : '/'
+const BASE_URL =
+  process.env.NODE_ENV === 'development' ? '/shu' : 'http://47.98.133.186'
 
 const user = {
   LOGIN: `${BASE_URL}/cas/api/oauth/password-token`,
