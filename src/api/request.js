@@ -93,7 +93,7 @@ instance.interceptors.response.use(
       })
     }
     console.log('err' + error) // for debug
-    return Promise.reject(error)
+    // return Promise.reject(error)
   }
 )
 

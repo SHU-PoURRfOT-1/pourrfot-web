@@ -8,7 +8,7 @@ export default {
       method: 'get',
       data,
       config: {
-        loading: '.loading-area',
+        loading: '.main',
       },
     })
   },

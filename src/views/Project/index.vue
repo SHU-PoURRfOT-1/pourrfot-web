@@ -3,28 +3,21 @@
     <Divider :content="title" />
     <el-table :data="projectList" style="width: 100%" class="loading-area">
       <el-table-column
-        header-align="center"
         align="center"
         prop="projectCode"
         label="项目代码"
       ></el-table-column>
       <el-table-column
-        header-align="center"
         align="center"
         prop="projectName"
         label="项目名称"
       ></el-table-column>
-      <el-table-column header-align="center" align="center" label="创建时间">
+      <el-table-column align="center" label="创建时间">
         <template slot-scope="scope">
           {{ new Date(scope.row.createTime).toLocaleString() }}
         </template>
       </el-table-column>
-      <el-table-column
-        header-align="center"
-        align="center"
-        label="操作"
-        width="250"
-      >
+      <el-table-column align="center" label="操作" width="250">
         <template>
           <el-button size="mini" type="primary">
             编辑

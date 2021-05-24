@@ -1,5 +1,4 @@
-const BASE_URL =
-  process.env.NODE_ENV === 'development' ? '/shu' : 'http://47.98.133.186'
+const BASE_URL = process.env.NODE_ENV === 'development' ? '/shu' : '/'
 
 const user = {
   LOGIN: `${BASE_URL}/cas/api/oauth/password-token`,
@@ -21,11 +20,20 @@ const project = {
   GET_PROJECT_DATA: `${BASE_URL}/api/projects/page`,
 }
 
+const file = {
+  GET_FILE_DATA: `${BASE_URL}/api/files/page`,
+  DOWNLOAD_FILE_DATA: `${BASE_URL}/api/files/detail`,
+  DELETE_FILE_DATA: `${BASE_URL}/api/files/delete`,
+  PRE_UPLOAD_FILE: `${BASE_URL}/api/files/cache`,
+  UPLOAD_FILE: `${BASE_URL}/api/files/create`,
+}
+
 const config = {
   ...user,
   ...course,
   ...group,
   ...project,
+  ...file,
 }
 
 export default config

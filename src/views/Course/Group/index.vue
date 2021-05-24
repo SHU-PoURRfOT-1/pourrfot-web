@@ -19,19 +19,16 @@
             border
           >
             <el-table-column
-              header-align="center"
               align="center"
               prop="studentId"
               label="ID"
             ></el-table-column>
             <el-table-column
-              header-align="center"
               align="center"
               prop="studentName"
               label="姓名"
             ></el-table-column>
             <el-table-column
-              header-align="center"
               align="center"
               prop="totalScore"
               label="分数"
@@ -40,19 +37,17 @@
         </template>
       </el-table-column>
       <el-table-column
-        header-align="center"
         align="center"
         prop="group.id"
         label="ID"
         width="50"
       ></el-table-column>
       <el-table-column
-        header-align="center"
         align="center"
         prop="group.groupName"
         label="小组名称"
       ></el-table-column>
-      <el-table-column header-align="center" align="center" label="创建日期">
+      <el-table-column align="center" label="创建日期">
         <template slot-scope="scope">
           {{ new Date(scope.row.group.createTime).toLocaleString() }}
         </template>

@@ -7,37 +7,28 @@
           + 新增课程
         </el-button>
       </div>
-      <el-table :data="courseData" class="loading-area" style="width: 100%">
+      <el-table :data="courseData" style="width: 100%">
         <el-table-column
-          header-align="center"
           align="center"
           prop="courseCode"
           label="课程代码"
         ></el-table-column>
         <el-table-column
-          header-align="center"
           align="center"
           prop="courseName"
           label="课程名称"
         ></el-table-column>
         <el-table-column
-          header-align="center"
           align="center"
           prop="classLocation"
           label="上课地点"
         ></el-table-column>
         <el-table-column
-          header-align="center"
           align="center"
           prop="classTime"
           label="上课时间"
         ></el-table-column>
-        <el-table-column
-          header-align="center"
-          align="center"
-          label="操作"
-          width="250"
-        >
+        <el-table-column align="center" label="操作" width="250">
           <template slot-scope="scope">
             <el-button size="mini" @click="toGroupPage(scope.row.id)">
               查看分组
@@ -66,28 +57,28 @@
         @close="resetDialog"
       >
         <el-form :model="createForm">
-          <el-form-item label="课程代码">
+          <el-form-item label="课程代码" required>
             <el-input
               v-model="createForm.courseCode"
               autocomplete="off"
               clearable
             ></el-input>
           </el-form-item>
-          <el-form-item label="课程名称">
+          <el-form-item label="课程名称" required>
             <el-input
               v-model="createForm.courseName"
               autocomplete="off"
               clearable
             ></el-input>
           </el-form-item>
-          <el-form-item label="上课地点">
+          <el-form-item label="上课地点" required>
             <el-input
               v-model="createForm.classLocation"
               autocomplete="off"
               clearable
             ></el-input>
           </el-form-item>
-          <el-form-item label="上课时间">
+          <el-form-item label="上课时间" required>
             <el-input
               v-model="createForm.classTime"
               autocomplete="off"
@@ -237,11 +228,7 @@ export default {
         data,
       }
       this.updateCourse(payload).then(() => {
-        this.$message({
-          message: '更新成功',
-          type: 'success',
-          duration: 3 * 1000,
-        })
+        this.$message.success('更新成功')
         this.editFormVisible = false
       })
     },
@@ -252,19 +239,11 @@ export default {
       }
       for (let key in payload) {
         if (!payload[key]) {
-          return this.$message({
-            message: '请填写完整信息',
-            type: 'warning',
-            duration: 3 * 1000,
-          })
+          return this.$message.warning('请填写完整信息')
         }
       }
       this.createCourse(payload).then(() => {
-        this.$message({
-          message: '添加成功',
-          type: 'success',
-          duration: 3 * 1000,
-        })
+        this.$message.success('添加成功')
         this.createFormVisible = false
       })
     },
