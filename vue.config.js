@@ -24,10 +24,10 @@ module.exports = {
     // disableHostCheck: true,
     proxy: {
       '/shu': {
-        target: 'http://47.98.133.186/cas/api',
+        target: 'http://47.98.133.186',
         changeOrigin: true,
         ws: false,
-        secure: false,
+        secure: true,
         pathRewrite: {
           '^/shu': '',
         },

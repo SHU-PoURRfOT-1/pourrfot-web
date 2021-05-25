@@ -1,13 +1,12 @@
-import { login, logout, getInfo } from '@/api/modules/user'
+import user from '@/api/modules/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
   return {
     token: getToken(),
-    name: '',
-    avatar: '',
-    userInfo: {},
+    userInfo: JSON.parse(localStorage.getItem('userInfo')),
+    roles: [],
   }
 }
 
@@ -17,36 +16,16 @@ const actions = {
   // user login
   login({ commit }, userInfo) {
     return new Promise((resolve, reject) => {
-      login(userInfo)
+      user
+        .login(userInfo)
         .then(response => {
           const { data } = response
-          commit('SET_TOKEN', data.token)
-          setToken(data.token)
-          commit('SET_USER_INFO', data.user)
+          const { token, user } = data
+          commit('SET_TOKEN', token)
+          setToken(token)
+          commit('SET_USER_INFO', user)
+          commit('SET_ROLES', user.role)
           resolve()
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token)
-        .then(response => {
-          const { data } = response
-
-          if (!data) {
-            return reject('Verification failed, please Login again.')
-          }
-
-          const { name, avatar } = data
-
-          commit('SET_NAME', name)
-          commit('SET_AVATAR', avatar)
-          resolve(data)
         })
         .catch(error => {
           reject(error)
@@ -55,18 +34,13 @@ const actions = {
   },
 
   // user logout
-  logout({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      logout(state.token)
-        .then(() => {
-          removeToken() // must remove  token  first
-          resetRouter()
-          commit('RESET_STATE')
-          resolve()
-        })
-        .catch(error => {
-          reject(error)
-        })
+  logout({ commit }) {
+    return new Promise(resolve => {
+      commit('SET_TOKEN', '')
+      commit('RESET_ROLES', [])
+      removeToken() // must remove  token  first
+      resetRouter()
+      resolve()
     })
   },
 
@@ -78,23 +52,42 @@ const actions = {
       resolve()
     })
   },
+
+  //dynamically modify permissions
+  // async changeRoles({ commit, dispatch }, role) {
+  //   const token = role + '-token'
+
+  //   commit('SET_TOKEN', token)
+  //   setToken(token)
+
+  //   const { roles } = await dispatch('getInfo')
+
+  //   resetRouter()
+
+  //   // generate accessible routes map based on roles
+  //   const accessRoutes = await dispatch('generateRoutes', roles)
+  //   // dynamically add accessible routes
+  //   router.addRoute(accessRoutes)
+  // },
 }
 
 const mutations = {
   RESET_STATE: state => {
+    localStorage.removeItem('userInfo')
     Object.assign(state, getDefaultState())
   },
   SET_TOKEN: (state, token) => {
     state.token = token
   },
   SET_USER_INFO: (state, info) => {
-    state.userInfo = { ...info }
+    state.userInfo = info
+    localStorage.setItem('userInfo', JSON.stringify(info))
   },
-  SET_NAME: (state, name) => {
-    state.name = name
+  SET_ROLES: (state, roles) => {
+    state.roles = [roles]
   },
-  SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
+  RESET_ROLES: (state, roles) => {
+    state.roles = roles
   },
 }
 

@@ -24,10 +24,10 @@
           <a target="_blank" href="https://github.com/SHU-PoURRfOT-1">
             <el-dropdown-item>Github</el-dropdown-item>
           </a>
-          <a target="_blank" href="http://47.98.133.186/cas/api/swagger-ui/">
+          <a target="_blank" href="http://47.98.133.186/api/swagger-ui">
             <el-dropdown-item>Docs</el-dropdown-item>
           </a>
-          <el-dropdown-item divided @click.native="logout">
+          <el-dropdown-item divided @click.native="handleLogout">
             <span style="display:block;">Log Out</span>
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -53,12 +53,12 @@ export default {
     }),
   },
   methods: {
-    ...mapActions(['toggleSideBar']),
+    ...mapActions(['toggleSideBar', 'logout']),
     toggle() {
       this.toggleSideBar()
     },
-    async logout() {
-      // await this.$store.dispatch('user/logout')
+    async handleLogout() {
+      await this.logout()
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     },
   },

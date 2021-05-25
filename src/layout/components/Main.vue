@@ -3,6 +3,7 @@
     <transition name="fade-transform" mode="out-in">
       <router-view :key="key" />
     </transition>
+    <el-backtop target=".main"></el-backtop>
   </section>
 </template>
 

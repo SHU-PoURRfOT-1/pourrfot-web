@@ -1,5 +1,7 @@
 module.exports = {
-  title: 'Vue Admin Template',
+  title: 'PoURRfOT',
+  // download OSS Domain
+  domain: 'http://47.98.133.186',
 
   /**
    * @type {boolean} true | false
