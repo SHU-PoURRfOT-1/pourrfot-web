@@ -1,11 +1,11 @@
 <template>
-  <div :class="{ 'has-logo': showLogo }">
+  <div :class="{ 'has-logo': showLogo }" :style="{ backgroundColor: bgColor }">
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
-        :background-color="variables.menuBg"
+        :background-color="bgColor"
         :text-color="variables.menuText"
         :unique-opened="false"
         :active-text-color="variables.menuActiveText"
@@ -35,6 +35,7 @@ export default {
     ...mapState({
       sidebar: state => state.app.sidebar,
       showLogo: state => state.settings.sidebarLogo,
+      bgColor: state => state.app.bgColor,
     }),
     routes() {
       return this.$router.options.routes

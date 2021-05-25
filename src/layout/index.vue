@@ -30,16 +30,9 @@ export default {
   computed: {
     ...mapState({
       sidebar: state => state.app.sidebar,
+      device: state => state.app.device,
+      fixedHeader: state => state.settings.fixedHeader,
     }),
-    sidebar() {
-      return this.$store.state.app.sidebar
-    },
-    device() {
-      return this.$store.state.app.device
-    },
-    fixedHeader() {
-      return this.$store.state.settings.fixedHeader
-    },
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
@@ -53,7 +46,6 @@ export default {
     ...mapActions(['closeSideBar']),
     handleClickOutside() {
       this.closeSideBar({ withoutAnimation: false })
-      // this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     },
   },
 }
