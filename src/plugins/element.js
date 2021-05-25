@@ -1,9 +1,14 @@
 import Vue from 'vue'
 import {
+  Avatar,
   Backtop,
   Breadcrumb,
   BreadcrumbItem,
   Button,
+  Calendar,
+  Card,
+  Col,
+  ColorPicker,
   Dialog,
   Divider,
   Dropdown,
@@ -22,20 +27,28 @@ import {
   PageHeader,
   Pagination,
   Popover,
+  Row,
   Scrollbar,
   Select,
   Submenu,
   Table,
   TableColumn,
   Tag,
+  Timeline,
+  TimelineItem,
   Tooltip,
   Upload,
 } from 'element-ui'
 
+Vue.use(Avatar)
 Vue.use(Backtop)
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
 Vue.use(Button)
+Vue.use(Calendar)
+Vue.use(Card)
+Vue.use(Col)
+Vue.use(ColorPicker)
 Vue.use(Dialog)
 Vue.use(Divider)
 Vue.use(Dropdown)
@@ -55,6 +68,7 @@ Vue.use(Option)
 Vue.use(PageHeader)
 Vue.use(Pagination)
 Vue.use(Popover)
+Vue.use(Row)
 // a hidden component, won't be shown in document, please see the issue
 Vue.use(Scrollbar)
 Vue.use(Select)
@@ -62,6 +76,8 @@ Vue.use(Submenu)
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Tag)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 Vue.use(Tooltip)
 Vue.use(Upload)
 
@@ -72,3 +88,5 @@ Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
+// set default font size
+Vue.prototype.$ELEMENT = { size: 'default' }

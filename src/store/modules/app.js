@@ -8,6 +8,9 @@ const state = () => ({
     withoutAnimation: false,
   },
   device: 'desktop',
+  size: Cookies.get('size') || 'medium',
+  fontSize: Cookies.get('fontSize') || 1,
+  bgColor: Cookies.get('color') || '#304156',
 })
 
 const actions = {
@@ -19,6 +22,15 @@ const actions = {
   },
   toggleDevice({ commit }, device) {
     commit('TOGGLE_DEVICE', device)
+  },
+  setSize({ commit }, size) {
+    commit('SET_SIZE', size)
+  },
+  setFontSize({ commit }, fontSize) {
+    commit('SET_FONTSIZE', fontSize)
+  },
+  setColor({ commit }, color) {
+    commit('SET_COLOR', color)
   },
 }
 
@@ -39,6 +51,18 @@ const mutations = {
   },
   TOGGLE_DEVICE: (state, device) => {
     state.device = device
+  },
+  SET_SIZE: (state, size) => {
+    state.size = size
+    Cookies.set('size', size)
+  },
+  SET_FONTSIZE: (state, fontSize) => {
+    state.fontSize = fontSize
+    Cookies.set('fontSize', fontSize)
+  },
+  SET_COLOR: (state, color) => {
+    state.bgColor = color
+    Cookies.set('color', color)
   },
 }
 

@@ -3,6 +3,17 @@ import Layout from '@/layout'
 
 export const constantRoutes = [
   {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/Redirect/index'),
+      },
+    ],
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () =>
@@ -23,7 +34,7 @@ export const constantRoutes = [
         path: 'dashboard',
         name: 'Dashboard',
         component: () => import('@/views/Dashboard/index'),
-        meta: { title: 'Dashboard', icon: 'dashboard' },
+        meta: { title: '首页', icon: 'dashboard' },
       },
     ],
   },
@@ -35,7 +46,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'Course',
         component: () => import('@/views/Course/index'),
-        meta: { title: 'Course', icon: 'course' },
+        meta: { title: '课程', icon: 'course' },
       },
     ],
   },
@@ -47,7 +58,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'Project',
         component: () => import('@/views/Project/index'),
-        meta: { title: 'Project', icon: 'project' },
+        meta: { title: '项目', icon: 'project' },
       },
     ],
   },
@@ -61,41 +72,41 @@ export const constantRoutes = [
     path: '/file',
     redirect: 'noRedirect',
     component: Layout,
-    meta: { title: 'File', icon: 'file' },
+    meta: { title: '文件', icon: 'file' },
     children: [
       {
         path: 'index',
         name: 'List',
         component: () => import('@/views/File/index'),
-        meta: { title: 'List', icon: 'list' },
+        meta: { title: '文件列表', icon: 'list' },
       },
       {
         path: 'upload',
         name: 'Upload',
         component: () => import('@/views/Upload/index'),
-        meta: { title: 'Upload', icon: 'upload' },
+        meta: { title: '文件上传', icon: 'upload' },
       },
     ],
   },
-  {
-    path: '/message',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Message',
-        component: () => import('@/views/Message/index'),
-        meta: { title: 'Message', icon: 'message' },
-      },
-    ],
-  },
+  // {
+  //   path: '/message',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Message',
+  //       component: () => import('@/views/Message/index'),
+  //       meta: { title: 'Message', icon: 'message' },
+  //     },
+  //   ],
+  // },
   {
     path: '/external-link',
     component: Layout,
     children: [
       {
         path: 'http://1.15.233.201/',
-        meta: { title: 'External Link', icon: 'link' },
+        meta: { title: '论坛', icon: 'link' },
       },
     ],
   },

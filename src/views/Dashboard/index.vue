@@ -1,26 +1,102 @@
 <template>
   <div class="dashboard-container">
-    <p class="dashboard-text">这是后台管理首页</p>
-    <p class="dashboard-text">暂时先空着 一般用于引导或者放一些介绍的内容</p>
-
-    <div class="info" v-if="userInfo">
-      <p>你登录的身份是 {{ userInfo.role }}</p>
-      <p>你的登录名是 {{ userInfo.username }}</p>
-      <p>你的昵称是 {{ userInfo.nickname }}</p>
-      <p>你的性别是 {{ userInfo.sex }}</p>
-    </div>
-    <div class="info" v-else>你还没登录</div>
+    <Divider :content="title" />
+    <el-row :gutter="20">
+      <el-col :span="8">
+        <el-card class="box-card dashboard-user">
+          <el-avatar
+            shape="circle"
+            :size="200 * fontSize"
+            :src="url"
+          ></el-avatar>
+          <p :style="{ fontSize: 2 * fontSize + 'rem' }">
+            欢迎您~{{ userInfo.nickname }}
+            <i
+              :class="classObj"
+              :style="{ color: userInfo.sex === 'female' ? 'pink' : 'blue' }"
+            ></i>
+            <span>{{ userRole }}</span>
+          </p>
+          <div class="card-footer">
+            <span>你本次登录的用户名是：{{ userInfo.username }}</span>
+          </div>
+        </el-card>
+        <div class="timeline-container">
+          <el-timeline>
+            <el-timeline-item
+              timestamp="2021/5/12"
+              placement="top"
+              type="success "
+              size="large"
+            >
+              <el-card :body-style="{ fontSize: 1.25 * fontSize + 'rem' }">
+                <h4>讲课</h4>
+                <p>算了还是先讲讲课吧</p>
+              </el-card>
+            </el-timeline-item>
+            <el-timeline-item
+              timestamp="2021/5/19"
+              placement="top"
+              type="warning "
+              size="large"
+            >
+              <el-card :body-style="{ fontSize: 1.25 * fontSize + 'rem' }">
+                <h4>汇报总结项目</h4>
+                <p>重点是注意讲清楚项目管理过程！！</p>
+              </el-card>
+            </el-timeline-item>
+            <el-timeline-item
+              timestamp="2021/5/26"
+              placement="top"
+              type="danger "
+              size="large"
+            >
+              <el-card :body-style="{ fontSize: 1.25 * fontSize + 'rem' }">
+                <h4>项目演示</h4>
+                <p>我猜他们也做不完 嘿嘿</p>
+              </el-card>
+            </el-timeline-item>
+          </el-timeline>
+        </div>
+      </el-col>
+      <el-col :span="16">
+        <el-calendar v-model="date"></el-calendar>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
+import Divider from '@/components/Divider'
 import { mapState } from 'vuex'
+const role = {
+  admin: '管理员',
+  teacher: '老师',
+  student: '同学',
+}
 export default {
   name: 'Dashboard',
+  data() {
+    return {
+      title: '首页',
+      url: require('../../assets/images/cat.jpg'),
+      date: new Date(),
+    }
+  },
+  components: {
+    Divider,
+  },
   computed: {
     ...mapState({
       userInfo: state => state.user.userInfo,
+      fontSize: state => state.app.fontSize,
     }),
+    classObj() {
+      return this.userInfo.sex === 'female' ? 'el-icon-female' : 'el-icon-male'
+    },
+    userRole() {
+      return role[this.userInfo.role]
+    },
   },
 }
 </script>
@@ -30,15 +106,16 @@ export default {
   &-container {
     margin: 30px;
   }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
+  &-user {
+    text-align: center;
+    .card-footer {
+      font-size: 0.8rem;
+      text-align: right;
+      color: #ccc;
+    }
   }
 }
-.info {
-  font-size: 1.5rem;
-  p {
-    margin-top: 20px;
-  }
+.timeline-container {
+  margin-top: 20px;
 }
 </style>
