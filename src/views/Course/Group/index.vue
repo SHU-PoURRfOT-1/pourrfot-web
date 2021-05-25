@@ -28,11 +28,29 @@
               prop="studentName"
               label="姓名"
             ></el-table-column>
-            <el-table-column
-              align="center"
-              prop="totalScore"
-              label="分数"
-            ></el-table-column>
+            <el-table-column align="center" label="总分">
+              <template slot-scope="scope">
+                <el-popover placement="top" trigger="hover" content="哈哈哈">
+                  <el-table :data="scope.row.detailScore">
+                    <el-table-column
+                      prop="description"
+                      label="详细"
+                    ></el-table-column>
+                    <el-table-column
+                      property="score"
+                      label="分数"
+                    ></el-table-column>
+                    <el-table-column
+                      property="weight"
+                      label="权重"
+                    ></el-table-column>
+                  </el-table>
+                  <span slot="reference">
+                    {{ scope.row.totalScore / 100 }}
+                  </span>
+                </el-popover>
+              </template>
+            </el-table-column>
           </el-table>
         </template>
       </el-table-column>
@@ -100,7 +118,6 @@ export default {
       const query = {
         current: page,
       }
-      console.log(query)
       this.fetchData(query)
     },
   },
@@ -109,6 +126,11 @@ export default {
 
 <style lang="scss" scoped>
 .group {
+  &-container {
+    .el-table__expanded-cell {
+      padding: 20px !important;
+    }
+  }
   &-footer {
     text-align: center;
     margin: 30px auto;

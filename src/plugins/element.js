@@ -21,6 +21,7 @@ import {
   Option,
   PageHeader,
   Pagination,
+  Popover,
   Scrollbar,
   Select,
   Submenu,
@@ -53,6 +54,7 @@ Vue.component(MessageBox.name, MessageBox)
 Vue.use(Option)
 Vue.use(PageHeader)
 Vue.use(Pagination)
+Vue.use(Popover)
 // a hidden component, won't be shown in document, please see the issue
 Vue.use(Scrollbar)
 Vue.use(Select)
