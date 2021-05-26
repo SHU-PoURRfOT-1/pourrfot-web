@@ -23,6 +23,22 @@ const actions = {
         })
     })
   },
+  createGroup({ commit }, payload) {
+    const { courseId } = payload
+    return new Promise((resolve, reject) => {
+      group
+        .createGroup(courseId, payload)
+        .then(response => {
+          console.log(response)
+          const { data } = response
+          commit('CREATE_GROUP_DATA', data)
+          resolve()
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
 }
 
 const mutations = {
@@ -31,6 +47,9 @@ const mutations = {
   },
   SET_TOTAL_GROUP_COUNT: (state, num) => {
     state.totalGroups = num
+  },
+  CREATE_GROUP_DATA: (state, group) => {
+    state.groupList = [...state.groupList, group]
   },
 }
 

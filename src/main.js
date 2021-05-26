@@ -12,8 +12,9 @@ import './icons' // icon
 
 import 'default-passive-events'
 
-// import '@/directive/permission'
-// import './permission' // permission control
+import permission from '@/directive/permission'
+Vue.use(permission)
+import './permission' // permission control
 
 Vue.config.productionTip = false
 

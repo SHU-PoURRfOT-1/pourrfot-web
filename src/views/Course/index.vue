@@ -2,7 +2,7 @@
   <div class="course-container">
     <template v-if="isCourseView">
       <Divider :content="title" />
-      <div class="course-operation">
+      <div class="course-operation" v-permission="['teacher']">
         <el-button type="text" @click="createFormVisible = true">
           + 新增课程
         </el-button>
@@ -37,6 +37,7 @@
               size="mini"
               type="primary"
               @click="openDialog(scope.$index, scope.row)"
+              v-permission="['teacher']"
             >
               编辑
             </el-button>
@@ -44,6 +45,7 @@
               size="mini"
               type="danger"
               @click="handleDelete(scope.$index, scope.row.id)"
+              v-permission="['teacher']"
             >
               删除
             </el-button>
@@ -85,6 +87,20 @@
               clearable
             ></el-input>
           </el-form-item>
+          <el-form-item label="分组设置">
+            <el-select
+              v-model="createForm.groupingMethod"
+              placeholder="请选择"
+              value-key="value"
+            >
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="createFormVisible = false">取 消</el-button>
@@ -123,6 +139,21 @@
               clearable
             ></el-input>
           </el-form-item>
+          <el-form-item label="分组设置">
+            <el-select
+              v-model="editForm.groupingMethod"
+              placeholder="请选择"
+              value-key="value"
+            >
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+            <br />
+          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="editFormVisible = false">取 消</el-button>
@@ -160,12 +191,14 @@ export default {
         courseName: '',
         classLocation: '',
         classTime: '',
+        groupingMethod: '',
       },
       createForm: {
         courseCode: '',
         courseName: '',
         classLocation: '',
         classTime: '',
+        groupingMethod: '',
       },
       createFormReset: {
         courseCode: '',
@@ -173,6 +206,12 @@ export default {
         classLocation: '',
         classTime: '',
       },
+      options: [
+        { label: '平均分组', value: 'AVERAGE' },
+        { label: '自由分组', value: 'FREE' },
+        { label: '不允许分组', value: 'NOT_GROUPING' },
+        { label: '由老师分组', value: 'STRICT_CONTROLLED ' },
+      ],
     }
   },
   created() {
@@ -220,7 +259,7 @@ export default {
       this.editFormVisible = true
       this.editForm = { ...row }
       this.clickIndex = index
-      console.log(this.editForm)
+      console.log(row)
     },
     handleEdit(index, data) {
       const payload = {
@@ -235,6 +274,7 @@ export default {
     handleCreate(form) {
       const payload = {
         teacherId: this.teacherId,
+        groupingMethod: this.groupMethod,
         ...form,
       }
       for (let key in payload) {
