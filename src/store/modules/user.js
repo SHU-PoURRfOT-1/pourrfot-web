@@ -6,7 +6,16 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     userInfo: JSON.parse(localStorage.getItem('userInfo')),
-    roles: [],
+    roles: hasRole(),
+  }
+}
+
+const hasRole = function() {
+  const info = JSON.parse(localStorage.getItem('userInfo'))
+  if (info && Object.values(info).length > 0 && info.role) {
+    return [info.role]
+  } else {
+    return []
   }
 }
 

@@ -8,7 +8,17 @@ export default {
       method: 'get',
       params: query,
       config: {
-        loading: '.loading-area',
+        loading: '.main',
+      },
+    })
+  },
+  createGroup: function(id, data) {
+    return request({
+      url: `${config.MAIN_GROUP_URL}/${id}/groups/create`,
+      method: 'post',
+      data,
+      config: {
+        loading: '.main',
       },
     })
   },

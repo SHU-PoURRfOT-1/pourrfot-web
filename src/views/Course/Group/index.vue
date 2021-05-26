@@ -5,6 +5,11 @@
       content="分组详情"
       style="margin:15px 0"
     ></el-page-header>
+    <div class="group-operation" v-permission="['teacher']">
+      <el-button type="text" @click="createGroupVisible = true">
+        + 添加分组
+      </el-button>
+    </div>
     <el-table
       :data="groupList"
       class="loading-area"
@@ -70,7 +75,40 @@
           {{ new Date(scope.row.group.createTime).toLocaleString() }}
         </template>
       </el-table-column>
+      <template v-if="checkPermission(['student'])">
+        <el-table-column align="center" label="操作">
+          <template slot-scope="scope">
+            <el-button type="text" @click="handleJoin(scope.row)">
+              加入分组
+            </el-button>
+            <el-button
+              type="danger"
+              size="small"
+              @click="handleQuit(scope.row)"
+            >
+              退出分组
+            </el-button>
+          </template>
+        </el-table-column>
+      </template>
     </el-table>
+    <el-dialog title="新增分组" :visible.sync="createGroupVisible" center>
+      <el-form :model="groupForm">
+        <el-form-item label="分组名称" required>
+          <el-input
+            v-model="groupForm.groupName"
+            autocomplete="off"
+            clearable
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="createGroupVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleCreate(groupForm)">
+          确 定
+        </el-button>
+      </div>
+    </el-dialog>
     <div class="group-footer">
       <Pagination
         :total="total"
@@ -83,11 +121,17 @@
 
 <script>
 import Pagination from '@/components/Pagination'
+import checkPermission from '@/utils/permission'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Group',
   data() {
-    return {}
+    return {
+      createGroupVisible: false,
+      groupForm: {
+        groupName: '',
+      },
+    }
   },
   components: {
     Pagination,
@@ -103,13 +147,30 @@ export default {
     this.fetchData()
   },
   methods: {
-    ...mapActions(['getGroup']),
+    ...mapActions(['getGroup', 'createGroup']),
     fetchData(query) {
       const payload = {
         courseId: this.courseId,
         query,
       }
       this.getGroup(payload)
+    },
+    checkPermission(role) {
+      return checkPermission(role)
+    },
+    handleCreate(form) {
+      if (this.groupForm.groupName === '') {
+        return this.$message.warning('请填写完整信息')
+      }
+      const payload = {
+        courseId: this.courseId,
+        ...form,
+      }
+      this.createGroup(payload).then(() => {
+        this.$message.success('添加成功')
+        this.fetchData()
+        this.createGroupVisible = false
+      })
     },
     goBack() {
       this.$emit('backCourseView')
@@ -120,6 +181,7 @@ export default {
       }
       this.fetchData(query)
     },
+    handleJoin() {},
   },
 }
 </script>
@@ -130,6 +192,10 @@ export default {
     .el-table__expanded-cell {
       padding: 20px !important;
     }
+  }
+  &-operation {
+    margin: 20px;
+    text-align: right;
   }
   &-footer {
     text-align: center;

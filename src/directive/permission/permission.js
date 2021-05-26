@@ -2,7 +2,7 @@ import store from '@/store'
 
 function checkPermission(el, binding) {
   const { value } = binding
-  const roles = store.user.roles
+  const roles = store.state.user.roles
 
   if (value && value instanceof Array) {
     if (value.length > 0) {
